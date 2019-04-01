@@ -44,17 +44,12 @@ poll_for_device(){
         wait_sec 5
         if [[ "$1" == "device" ]]; then
             var="$(adb devices | awk 'NR==2' | grep $1)"
-        else
-            echo "debug $1"
-        fi
-        
-        if [[ "$1" == "fastboot" ]]; then
+        elif [[ "$1" == "fastboot" ]]; then
             var="$(fastboot devices | awk 'NR==1' | grep $1)"
         else
             echo "Unknown mode $1"
         fi
-        echo "debug"
-        echo "$var"
+
         if [[ -z "$var" ]]; then
           continue
         else
